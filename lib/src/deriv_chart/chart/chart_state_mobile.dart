@@ -34,8 +34,11 @@ class _ChartStateMobile extends _ChartState {
     final Duration quoteBoundsAnimationDuration =
         widget.quoteBoundsAnimationDuration ?? _defaultDuration;
 
-    List<Widget> getBottomIndicatorsList(BuildContext context) =>
-        widget.indicatorsRepo!.items
+    List<Widget> getBottomIndicatorsList(BuildContext context) {
+      if (widget.indicatorsRepo == null) { 
+        return <Widget>[];
+      }
+      return widget.indicatorsRepo!.items
             .mapIndexed((int index, IndicatorConfig config) {
           if (config.isOverlay) {
             return const SizedBox.shrink();
@@ -82,6 +85,7 @@ class _ChartStateMobile extends _ChartState {
                   child: bottomChart,
                 );
         }).toList();
+    }
 
     final List<Series> overlaySeries = <Series>[];
 
@@ -209,6 +213,7 @@ class _ChartStateMobile extends _ChartState {
       1 - (0.65 - 0.125 * (bottomIndicatorsCount - 1));
 
   bool get _isAllBottomIndicatorsHidden {
+    if (widget.indicatorsRepo == null) return true;
     bool isAllHidden = true;
     for (int i = 0; i < widget.indicatorsRepo!.items.length; i++) {
       if (!widget.indicatorsRepo!.items[i].isOverlay &&
