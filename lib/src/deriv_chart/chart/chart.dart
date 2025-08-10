@@ -78,6 +78,7 @@ class Chart extends StatefulWidget {
     this.showDataFitButton,
     this.showScrollToLastTickButton,
     this.loadingAnimationColor,
+    this.showLoadingAnimationForHistoricalData = true,
     this.useDrawingToolsV2 = false,
     Key? key,
   }) : super(key: key);
@@ -189,6 +190,10 @@ class Chart extends StatefulWidget {
 
   /// The color of the loading animation.
   final Color? loadingAnimationColor;
+
+  /// Whether to show loading animation for historical data.
+  /// When false, loading stripes won't appear at chart edges.
+  final bool showLoadingAnimationForHistoricalData;
 
   /// Chart's indicators
   final Repository<IndicatorConfig>? indicatorsRepo;
